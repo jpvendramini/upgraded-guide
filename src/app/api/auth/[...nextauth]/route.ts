@@ -6,13 +6,10 @@ import { encrypt } from "@/utils/encryption";
 // this will refresh an expired access token, when needed
 async function refreshAccessToken(token: any) {
   const urlencoded = new URLSearchParams();
-  urlencoded.append(
-    "client_id",
-    `${process.env.NEXT_PUBLIC_DEMO_FRONTEND_CLIENT_ID}`
-  );
+  urlencoded.append("client_id", `${process.env.NEXT_PUBLIC_CLIENT_ID}`);
   urlencoded.append(
     "client_secret",
-    `${process.env.NEXT_PUBLIC_DEMO_FRONTEND_CLIENT_SECRET}`
+    `${process.env.NEXT_PUBLIC_CLIENT_SECRET}`
   );
   urlencoded.append("grant_type", `refresh_token`);
   urlencoded.append("refresh_token", token.refresh_token);
@@ -38,9 +35,9 @@ const authOptions = {
   providers: [
     KeycloakProvider({
       id: "keycloak",
-      clientId: `****CONFIDENTIAL****`,
-      clientSecret: `****CONFIDENTIAL****`,
-      issuer: `****CONFIDENTIAL****`,
+      clientId: `${process.env.NEXT_PUBLIC_CLIENT_ID}`,
+      clientSecret: `${process.env.NEXT_PUBLIC_CLIENT_SECRET}`,
+      issuer: `${process.env.NEXT_PUBLIC_AUTH_ISSUER}`,
       checks: "pkce",
     }),
   ],
@@ -89,4 +86,4 @@ const authOptions = {
 
 const handler = NextAuth(authOptions);
 
-export { handler as GET, handler as POST };
+export { handler as GET, handler as POST, authOptions };
