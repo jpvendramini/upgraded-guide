@@ -22,3 +22,7 @@ export default async function middleware(
   // @ts-expect-error
   return authMiddleware(req, event);
 }
+
+export const config = {
+  matcher: ["/((?!api|static|favicon.ico|_next|icons|fonts|images).*)"],
+};

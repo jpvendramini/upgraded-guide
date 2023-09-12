@@ -11,7 +11,7 @@ const LoginTemplate = ({ form }: Props) => {
     <div className="w-full">
       <Image
         alt="Login wallpaper"
-        src="/login-wallpaper.jpg"
+        src="/images/login-wallpaper.jpg"
         layout="fill"
         className="object-cover"
       />
