@@ -34,7 +34,7 @@ async function refreshAccessToken(token: any) {
   };
 }
 
-export const authOptions = {
+const authOptions = {
   providers: [
     KeycloakProvider({
       id: "keycloak",
