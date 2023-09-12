@@ -2,7 +2,7 @@ import { authOptions } from "../[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import { decrypt } from "@utils/encryption";
 
-export async function getIdToken() {
+async function getIdToken() {
   const session = await getServerSession(authOptions);
   if (session) {
     const idTokenDecrypted = decrypt(session.id_token);
