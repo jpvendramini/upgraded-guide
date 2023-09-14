@@ -5,7 +5,7 @@ type Props = {
 };
 
 const Title = ({ title }: Props) => {
-  return <div className="font-bold">{title}</div>;
+  return <div className="text-white font-bold font-sans text-2xl">{title}</div>;
 };
 
 export default Title;
