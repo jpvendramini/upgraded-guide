@@ -21,12 +21,12 @@ export default function RankLayout({
         {logo}
         {profile}
       </div>
-      <div className="flex flex-col xl:flex-row md:flex-col sm:flex-col w-full bg-red-700 justify-between max-w-7xl">
-        <div className="bg-slate-900 w-full">
+      <div className="flex flex-col xl:flex-row md:flex-col sm:flex-col w-full justify-between max-w-7xl">
+        <div className="w-full">
           <div className="p-6">{estatisticas}</div>
           <div className="p-6">{submissoes}</div>
         </div>
-        <div className="bg-red-700 w-full">
+        <div className="w-full">
           <div className="p-6">{podium}</div>
           <div className="p-6">{rank}</div>
         </div>
