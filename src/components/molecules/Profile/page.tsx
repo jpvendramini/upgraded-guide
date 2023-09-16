@@ -18,12 +18,8 @@ export default function Profile() {
         keycloakSessionLogOut().then(() => signOut({ callbackUrl: "/" }));
       }}
     >
-      <Image
-        alt="profile image"
-        src="icons/profile.svg"
-        width={20}
-        height={20}
-      />
+    {/* TODO: adicionar ícone de profile e opções do menu */}
+      <p className="font-sans font-bold text-white text-2xl">Sair</p>
     </button>
   );
 }

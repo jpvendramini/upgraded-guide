@@ -6,17 +6,20 @@ import Podium from "@components/organisms/Podium/page";
 import Submissoes from "@components/organisms/Submissoes/page";
 import Profile from "@components/molecules/Profile/page";
 import Logo from "@components/atoms/Logo/page";
+import RankingContextProvider from "@contexts/RankingContext";
 
 const Dashboard = () => {
   return (
-    <RankLayout
-      estatisticas={<Estatisticas />}
-      podium={<Podium />}
-      rank={<Rank />}
-      submissoes={<Submissoes />}
-      profile={<Profile />}
-      logo={<Logo />}
-    />
+    <RankingContextProvider>
+      <RankLayout
+        estatisticas={<Estatisticas />}
+        podium={<Podium />}
+        rank={<Rank />}
+        submissoes={<Submissoes />}
+        profile={<Profile />}
+        logo={<Logo />}
+      />
+    </RankingContextProvider>
   );
 };
 
