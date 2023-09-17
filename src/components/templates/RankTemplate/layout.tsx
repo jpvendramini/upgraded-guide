@@ -23,12 +23,12 @@ export default function RankLayout({
       </div>
       <div className="flex flex-col xl:flex-row md:flex-col sm:flex-col w-full justify-between max-w-7xl">
         <div className="w-full">
-          <div className="p-6">{estatisticas}</div>
-          <div className="p-6">{submissoes}</div>
+          <div className="p-4">{estatisticas}</div>
+          <div className="p-4">{submissoes}</div>
         </div>
         <div className="w-full">
-          <div className="p-6">{podium}</div>
-          <div className="p-6">{rank}</div>
+          <div className="p-4">{podium}</div>
+          <div className="p-4">{rank}</div>
         </div>
       </div>
     </div>
