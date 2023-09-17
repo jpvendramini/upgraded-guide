@@ -1,6 +1,7 @@
 "use client";
-import "@styles/global.css";
 import SessionProviderWrapper from "@/components/utils/SessionProviderWraper";
+import Providers from "@providers/QueryClientProvider";
+import "@styles/global.css";
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -10,11 +11,11 @@ export default function RootLayout({ children }: any) {
     <SessionProviderWrapper>
       <html lang="en">
         <body className={inter.className}>
-          <div>{children}</div>
+          <Providers>{children}</Providers>
         </body>
       </html>
     </SessionProviderWrapper>
   );
 }
 
-const AuthFlow = () => {};
+const AuthFlow = () => { };

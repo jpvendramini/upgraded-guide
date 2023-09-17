@@ -1,5 +1,4 @@
 import PodiumCard, { PodiumType } from "@components/atoms/PodiumCard/page";
-import React from "react";
 
 type Props = {
     podiumList: PodiumType[]
@@ -7,8 +6,9 @@ type Props = {
 
 const PodiumSession = ({ podiumList }: Props) => {
     return <div className="flex gap-6">
-        {podiumList.map((podium) => (
+        {podiumList.map((podium, index) => (
             <PodiumCard
+                key={`podium-session-${index}`}
                 dataUltimoEnvio={podium.dataUltimoEnvio}
                 icone={podium.icone}
                 iniciais={podium.iniciais}

@@ -7,7 +7,7 @@ export type PodiumType = {
     nota: number;
     dataUltimoEnvio: string;
     icone: string;
-    backgroundColor?: string;
+    backgroundColor: string;
 };
 
 const PodiumCard = ({ email, iniciais, nota, dataUltimoEnvio, backgroundColor, icone, linguagem }: PodiumType) => {
@@ -33,9 +33,5 @@ const PodiumCard = ({ email, iniciais, nota, dataUltimoEnvio, backgroundColor, i
         </div>
     );
 };
-
-PodiumCard.defaultProps = {
-    backgroundColor: "bg-[#666666]"
-}
 
 export default PodiumCard;
