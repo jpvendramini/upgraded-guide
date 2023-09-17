@@ -5,7 +5,7 @@ const EstatisticasCard = () => {
     const linePoints = [0, 30, 45, 10, 25, 26, 70, 100];
 
     return (
-        <div className='h-[250px] bg-[#3D3D3D80] rounded-lg flex px-6 py-3 justify-end relative'>
+        <div className='h-[230px] bg-[#3D3D3D80] rounded-lg flex px-6 py-3 justify-end relative'>
             <div className="flex flex-col justify-start w-2/3">
                 <Label value="Pontuação por envio" />
                 <LineChart linePoints={linePoints} />
