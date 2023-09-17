@@ -9,7 +9,11 @@ export default async function middleware(
   const token = await getToken({ req });
   const isAuthenticated = !!token;
 
-  if (req.nextUrl.pathname.startsWith("/login") && isAuthenticated) {
+  if (
+    (req.nextUrl.pathname.startsWith("/login") ||
+      req.nextUrl.pathname.startsWith("/cadastro")) &&
+    isAuthenticated
+  ) {
     return NextResponse.redirect(new URL("/dashboard", req.url));
   }
 
@@ -24,5 +28,5 @@ export default async function middleware(
 }
 
 export const config = {
-  matcher: ["/((?!api|static|favicon.ico|_next|icons|fonts|images).*)"],
+  matcher: ["/((?!api|static|favicon.ico|_next|icons|fonts|images|cadastro).*)"],
 };
