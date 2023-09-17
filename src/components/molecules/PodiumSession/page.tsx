@@ -12,9 +12,10 @@ const PodiumSession = ({ podiumList }: Props) => {
                 dataUltimoEnvio={podium.dataUltimoEnvio}
                 icone={podium.icone}
                 iniciais={podium.iniciais}
-                nome={podium.nome}
-                pontuacao={podium.pontuacao}
+                email={podium.email}
+                nota={podium.nota}
                 backgroundColor={podium.backgroundColor}
+                linguagem={podium.linguagem}
             />
         ))}
     </div>;
