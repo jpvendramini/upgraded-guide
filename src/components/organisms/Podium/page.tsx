@@ -7,25 +7,28 @@ import React from 'react'
 const Podium = () => {
   const pesoPesadoPodium: PodiumType[] = [
     {
-      nome: "Pablo Wink da Silva",
+      email: "pablo@teste.com",
       iniciais: "PW",
-      pontuacao: 100,
+      nota: 100,
+      linguagem: "Javinha",
       dataUltimoEnvio: "10/09/2023",
       icone: "icons/golden-trophy.svg",
       backgroundColor: "bg-[#a17808]"
     },
     {
-      nome: "Joao Vendramini",
+      email: "joao@teste.com",
       iniciais: "JV",
-      pontuacao: 80,
+      linguagem: "Node",
+      nota: 80,
       dataUltimoEnvio: "10/09/2023",
       icone: "icons/silver-trophy.svg",
       backgroundColor: "bg-[#c0c0c0]"
     },
     {
-      nome: "Julio Cesar Alves",
+      email: "julio@teste.com",
       iniciais: "JA",
-      pontuacao: 70,
+      nota: 70,
+      linguagem: "Meme",
       dataUltimoEnvio: "10/09/2023",
       icone: "icons/bronze-trophy.svg",
       backgroundColor: "bg-[#EE9874]"
@@ -34,25 +37,28 @@ const Podium = () => {
 
   const pesoPenaPodium: PodiumType[] = [
     {
-      nome: "Juliana Melo",
+      email: "juliana@teste.com",
       iniciais: "JM",
-      pontuacao: 100,
+      nota: 100,
+      linguagem: "Node",
       dataUltimoEnvio: "10/09/2023",
       icone: "icons/golden-coin.svg",
       backgroundColor: "bg-[#a17808]"
     },
     {
-      nome: "Pedro Augusto",
+      email: "pedro@teste",
       iniciais: "PA",
-      pontuacao: 80,
+      linguagem: "Elixir",
+      nota: 80,
       dataUltimoEnvio: "10/09/2023",
       icone: "icons/silver-coin.svg",
       backgroundColor: "bg-[#c0c0c0]"
     },
     {
-      nome: "Marcos Souza",
+      email: "marcos@teste",
       iniciais: "MS",
-      pontuacao: 70,
+      linguagem: "PHP",
+      nota: 70,
       dataUltimoEnvio: "10/09/2023",
       icone: "icons/bronze-coin.svg",
       backgroundColor: "bg-[#EE9874]"
