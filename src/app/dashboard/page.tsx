@@ -7,19 +7,22 @@ import Submissoes from "@components/organisms/Submissoes/page";
 import Profile from "@components/molecules/Profile/page";
 import Logo from "@components/atoms/Logo/page";
 import DropZoneProvider from "@components/contexts/DropZoneContext";
+import RankingContextProvider from "@contexts/RankingContext";
 
 const Dashboard = () => {
   return (
-    <DropZoneProvider>
-      <RankLayout
-        estatisticas={<Estatisticas />}
-        podium={<Podium />}
-        rank={<Rank />}
-        submissoes={<Submissoes />}
-        profile={<Profile />}
-        logo={<Logo />}
-      />
-    </DropZoneProvider>
+    <RankingContextProvider>
+      <DropZoneProvider>
+        <RankLayout
+          estatisticas={<Estatisticas />}
+          podium={<Podium />}
+          rank={<Rank />}
+          submissoes={<Submissoes />}
+          profile={<Profile />}
+          logo={<Logo />}
+        />
+      </DropZoneProvider>
+    </RankingContextProvider>
   );
 };
 
