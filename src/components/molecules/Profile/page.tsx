@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { signOut } from "next-auth/react";
 
 async function keycloakSessionLogOut() {
@@ -13,12 +12,13 @@ async function keycloakSessionLogOut() {
 export default function Profile() {
   return (
     <button
+      className="-mr-24"
       type="button"
       onClick={() => {
         keycloakSessionLogOut().then(() => signOut({ callbackUrl: "/" }));
       }}
     >
-    {/* TODO: adicionar ícone de profile e opções do menu */}
+      {/* TODO: adicionar ícone de profile e opções do menu */}
       <p className="font-sans font-bold text-white text-2xl">Sair</p>
     </button>
   );
