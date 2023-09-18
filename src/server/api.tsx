@@ -1,11 +1,1 @@
-import axios from 'axios';
-
-export const useApi = () => {
-  return {
-    api: axios.create({
-      baseURL: `${'http://localhost:8080'
-        }`,
-      headers: {},
-    }),
-  };
-};
+export const baseUrl = "https://1d05-181-192-84-97.ngrok.io/v1"

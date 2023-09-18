@@ -7,6 +7,7 @@ import Podium from "@components/organisms/Podium/page";
 import Submissoes from "@components/organisms/Submissoes/page";
 import Rank from "@components/organisms/rank/page";
 import RankingContextProvider from "@contexts/RankingContext";
+import { getSession } from "next-auth/react";
 
 const Dashboard = () => {
   return (
@@ -26,3 +27,10 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+export async function getServerSideProps(ctx: any) {
+  return {
+    props: {
+      session: await getSession(ctx)
+    }
+  }
+}

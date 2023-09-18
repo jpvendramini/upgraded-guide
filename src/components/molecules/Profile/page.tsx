@@ -12,7 +12,6 @@ async function keycloakSessionLogOut() {
 export default function Profile() {
   return (
     <button
-      className="-mr-24"
       type="button"
       onClick={() => {
         keycloakSessionLogOut().then(() => signOut({ callbackUrl: "/" }));

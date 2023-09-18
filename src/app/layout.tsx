@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import SessionProviderWrapper from "@/components/utils/SessionProviderWraper";
 import Providers from "@providers/QueryClientProvider";
 import "@styles/global.css";

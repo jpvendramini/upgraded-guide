@@ -6,7 +6,7 @@ const Estatisticas = () => {
   return (
     <div className="flex flex-col gap-4">
       <div>
-        <Title title="Minhas estatísticas"/>
+        <Title title="Minhas estatísticas" />
         <Description value="Aqui  você pode conferir as estatísticas dos últimos envios realizados." />
       </div>
       <EstatisticasCard />
