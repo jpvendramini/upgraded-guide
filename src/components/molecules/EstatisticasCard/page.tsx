@@ -6,8 +6,7 @@ import { getServerSession } from "next-auth";
 
 const EstatisticasCard = async () => {
     const { user } = await getServerSession(authOptions);
-    const data = await fetch(`${baseUrl}/submissoes/user/${user.email}`,
-        { next: { revalidate: 20 } })
+    const data = await fetch(`${baseUrl}/submissoes/user/${user.email}`)
         .then((result) => result.json());
 
     const linePoints = data.map((item: any) => Number(item.nota).toFixed(2));
