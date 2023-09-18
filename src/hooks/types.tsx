@@ -28,3 +28,12 @@ export type RankingResultType = {
     total: TotalType;
     page: PageType;
 }
+
+export type EstatisticasType = {
+    situacao: string,
+    dataEnvio: string,
+    userId: string,
+    linguagem: string,
+    categoria: string,
+    nota: string,
+}

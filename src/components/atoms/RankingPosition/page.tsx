@@ -1,5 +1,4 @@
 import Image from "next/image";
-import React from "react";
 
 
 type Props = {
@@ -12,8 +11,8 @@ const RankingPosition = ({ value }: Props) => {
         <Image
             alt="ranking coin icon"
             src={"icons/coin.svg"}
-            width={40}
-            height={35}
+            width={30}
+            height={30}
         />
     </div>;
 };
