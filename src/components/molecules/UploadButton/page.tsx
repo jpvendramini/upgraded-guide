@@ -10,24 +10,22 @@ const UploadButton = () => {
     if (file && linguagem && !loading) {
       var formdata = new FormData();
       setLoading(true);
-      fetch('/api/auth/session')
-        .then(response => response.json())
-        .then((response) => {
-          formdata.append("userId", response?.user?.email);
-          formdata.append("categoria", "PESO_PESADO");
-          formdata.append("linguagem", linguagem);
-          formdata.append("arquivo", file);
-          var requestOptions = {
-            method: 'POST',
-            body: formdata,
-          };
-          fetch(`${baseUrl}/submissoes`, requestOptions)
-            .then(response => response.text())
-            .then(() => toast.success("Submissão feita com sucesso"))
-            .catch(() => toast.error("Erro ao fazer submissão"))
-            .finally(() => setLoading(false))
-        })
-        .catch(() => toast.error("Erro durante a execução"));
+      (async (): Promise<void> => {
+        const session = await fetch('/api/auth/session')
+          .then(response => response.json());
+        formdata.append("userId", session?.user?.email);
+        formdata.append("categoria", "PESO_PESADO");
+        formdata.append("linguagem", linguagem);
+        formdata.append("arquivo", file);
+        var requestOptions = {
+          method: 'POST',
+          body: formdata,
+        };
+        fetch(`${baseUrl}/submissoes`, requestOptions)
+          .then(() => toast.success("Submissão feita com sucesso"))
+          .catch(() => toast.error("Erro ao fazer submissão"))
+          .finally(() => setLoading(false));
+      })()
       setLinguagem("");
       setFile(undefined);
     }
@@ -46,9 +44,10 @@ const UploadButton = () => {
       `}
       onClick={handleEnviarArquivo}
       type="submit"
+      disabled={isDisabled}
     >
       <div className="text-white font-sans text-sm">
-        {!isDisabled ? "Enviar" : "Adicione Arquivo"}
+        {loading ? "Enviando..." : !isDisabled ? "Enviar" : "Adicione Arquivo"}
       </div>
     </button>
   );
