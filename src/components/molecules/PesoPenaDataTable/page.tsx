@@ -1,3 +1,4 @@
+"use client"
 import Label from "@components/atoms/Label/page";
 import PesoPenaIcon from "@components/atoms/PesoPenaIcon/page";
 import DataTable from "@components/molecules/DataTable/page";
@@ -6,7 +7,6 @@ import { baseUrl } from "@server/api";
 import { useEffect, useState } from "react";
 import { ColumnType } from "../DataTable/types";
 import PesoPenaPagination from "../PesoPenaPagination/page";
-
 
 const PesoPenaDataTable = () => {
   const columns: ColumnType[] = [

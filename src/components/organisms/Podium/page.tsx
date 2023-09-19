@@ -105,7 +105,7 @@ const Podium = () => {
   if (!pesoPenaPodium) return <Label value='Carregando...' />
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 h-[332px]">
       <div>
         <Title title="Pódium" />
         <Description value="O hall dos campeões!" />

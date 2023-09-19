@@ -21,7 +21,7 @@ const UploadButton = () => {
           method: 'POST',
           body: formdata,
           headers: {
-            Authorizarion: `Bearer ${session?.access_token}`
+            Authorization: `Bearer ${session?.access_token}`
           }
         };
         fetch(`${baseUrl}/submissoes`, requestOptions,
