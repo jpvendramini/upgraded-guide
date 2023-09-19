@@ -10,11 +10,11 @@ import PesoPesadoPagination from "../PesoPesadoPagination/page";
 
 const PesoPesadoDataTable = () => {
   const columns: ColumnType[] = [
-    { title: 'Nota', alignment: 'center', width: '20%' },
-    { title: 'Email', alignment: 'left', width: '30%' },
-    { title: 'Data Envio', alignment: 'left', width: '20%' },
-    { title: 'Linguagem', alignment: 'center', width: '10%' },
-    { title: 'Categoria', alignment: 'center', width: '20%' },
+    { title: 'Email', alignment: 'left', width: '20%' },
+    { title: 'Nota', alignment: 'left', width: '8%' },
+    { title: 'Data Envio', alignment: 'left', width: '18%' },
+    { title: 'Linguagem', alignment: 'left', width: '18%' },
+    { title: 'Categoria', alignment: 'center', width: '10%' },
   ];
   const { pesoPesadoPage } = useRankingContext();
   const [data, setData] = useState(undefined);
@@ -23,14 +23,14 @@ const PesoPesadoDataTable = () => {
     fetch('/api/auth/session')
       .then((response) => response.json())
       .then((response) => {
-        fetch(`${baseUrl}/ranking?categoria=PESO_PESADO&size=4&page=${pesoPesadoPage}`, {
+        fetch(`${baseUrl}/ranking?categoria=PESO_PESADO&size=4&page=${pesoPesadoPage - 1}`, {
           headers: {
-            Authorizarion: `Bearer ${response.access_token}`
+            Authorization: `Bearer ${response.access_token}`
           }
         })
           .then(response => response.json())
           .then((result) => {
-            const pesoPesadoData = result?.content.map((pesoPesado: any, index: any) => {
+            const pesoPesadoData = result?.content.map((pesoPesado: any) => {
               const rank = {
                 email: pesoPesado.userId,
                 nota: Number(pesoPesado.nota).toFixed(2),
@@ -44,11 +44,11 @@ const PesoPesadoDataTable = () => {
           })
       })
 
-  }, [])
+  }, [pesoPesadoPage])
 
   if (!data) return <Label value="Carregando..." />
 
-  return <div className="bg-[#3D3D3D80] rounded-xl">
+  return <div className="bg-[#3D3D3D80] rounded-xl h-[390px] flex flex-col justify-between">
     <DataTable columns={columns} rows={data} />
     <PesoPesadoPagination />
   </div>;

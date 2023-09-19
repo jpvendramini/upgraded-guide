@@ -3,7 +3,9 @@ import Logo from "@components/atoms/Logo/page";
 import DropZoneProvider from "@components/contexts/DropZoneContext";
 import Profile from "@components/molecules/Profile/page";
 import Estatisticas from "@components/organisms/Estatisticas/page";
+import Podium from "@components/organisms/Podium/page";
 import Submissoes from "@components/organisms/Submissoes/page";
+import Rank from "@components/organisms/rank/page";
 import RankingContextProvider from "@contexts/RankingContext";
 
 const Dashboard = () => {
@@ -11,9 +13,8 @@ const Dashboard = () => {
     <RankingContextProvider>
       <DropZoneProvider>
         <RankLayout
-          /* 
           podium={<Podium />}
-          rank={<Rank />} */
+          rank={<Rank />}
           estatisticas={<Estatisticas />}
           submissoes={<Submissoes />}
           profile={<Profile />}
