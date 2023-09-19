@@ -1,14 +1,14 @@
 "use client";
-import { useMemo } from "react";
 import {
-  Chart as ChartJS,
   CategoryScale,
+  Chart as ChartJS,
+  Filler,
+  LineElement,
   LinearScale,
   PointElement,
-  LineElement,
   Tooltip,
-  Filler,
 } from "chart.js";
+import { useMemo } from "react";
 import { Line } from "react-chartjs-2";
 
 ChartJS.register(
@@ -28,7 +28,7 @@ const options = {
   responsive: true,
 };
 
-const LineChart = async ({ linePoints }: Props) => {
+const LineChart = ({ linePoints }: Props) => {
   const lineData = useMemo(() => {
     const labels = linePoints.map(() => "");
     const data = {

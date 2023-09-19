@@ -1,58 +1,55 @@
-import DataTable from "@components/molecules/DataTable/page";
-import React from "react";
-import { ColumnType, RowType } from "../DataTable/types";
-import RankingPosition from "@components/atoms/RankingPosition/page";
+"use client"
+import Label from "@components/atoms/Label/page";
 import PesoPesadoIcon from "@components/atoms/PesoPesadoIcon/page";
+import DataTable from "@components/molecules/DataTable/page";
+import { useRankingContext } from "@contexts/RankingContext";
+import { baseUrl } from "@server/api";
+import { useEffect, useState } from "react";
+import { ColumnType } from "../DataTable/types";
 import PesoPesadoPagination from "../PesoPesadoPagination/page";
-
 
 const PesoPesadoDataTable = () => {
   const columns: ColumnType[] = [
-    { title: 'Posição', alignment: 'left', width: '10%' },
     { title: 'Email', alignment: 'left', width: '20%' },
-    { title: 'Nota', alignment: 'center', width: '20%' },
-    { title: 'Data Envio', alignment: 'left', width: '20%' },
-    { title: 'Linguagem', alignment: 'center', width: '10%' },
-    { title: 'Categoria', alignment: 'center', width: '20%' },
+    { title: 'Nota', alignment: 'left', width: '8%' },
+    { title: 'Data Envio', alignment: 'left', width: '18%' },
+    { title: 'Linguagem', alignment: 'left', width: '18%' },
+    { title: 'Categoria', alignment: 'center', width: '10%' },
   ];
+  const { pesoPesadoPage } = useRankingContext();
+  const [data, setData] = useState(undefined);
 
-  const rows: RowType[] = [
-    {
-      posicao: <RankingPosition value={4} />,
-      email: "@teste.comdasdaasda dasd",
-      nota: 50,
-      dataEnvio: "15/09/2023",
-      linguagem: "Java",
-      categoria: <PesoPesadoIcon />
-    },
-    {
-      posicao: <RankingPosition value={5} />,
-      email: "@teste.comdasdaasda dasd",
-      nota: 50,
-      dataEnvio: "15/09/2023",
-      linguagem: "Java",
-      categoria: <PesoPesadoIcon />
-    },
-    {
-      posicao: <RankingPosition value={6} />,
-      email: "@teste.comdasdaasda dasd",
-      nota: 50,
-      dataEnvio: "15/09/2023",
-      linguagem: "Java",
-      categoria: <PesoPesadoIcon />
-    },
-    {
-      posicao: <RankingPosition value={7} />,
-      email: "@teste.comdasdaasda dasd",
-      nota: 50,
-      dataEnvio: "15/09/2023",
-      linguagem: "Java",
-      categoria: <PesoPesadoIcon />
-    }
-  ]
+  useEffect(() => {
+    fetch('/api/auth/session')
+      .then((response) => response.json())
+      .then((response) => {
+        fetch(`${baseUrl}/ranking?categoria=PESO_PESADO&size=4&page=${pesoPesadoPage - 1}`, {
+          headers: {
+            Authorization: `Bearer ${response.access_token}`
+          }
+        })
+          .then(response => response.json())
+          .then((result) => {
+            const pesoPesadoData = result?.content.map((pesoPesado: any) => {
+              const rank = {
+                email: pesoPesado.userId,
+                nota: Number(pesoPesado.nota).toFixed(2),
+                dataEnvio: pesoPesado.dataEnvio,
+                linguagem: pesoPesado.linguagem,
+                categoria: <PesoPesadoIcon />
+              }
+              return rank;
+            })
+            setData(pesoPesadoData);
+          })
+      })
 
-  return <div className="bg-[#3D3D3D80] rounded-xl">
-    <DataTable columns={columns} rows={rows} />
+  }, [pesoPesadoPage])
+
+  if (!data) return <Label value="Carregando..." />
+
+  return <div className="bg-[#3D3D3D80] rounded-xl h-[390px] flex flex-col justify-between">
+    <DataTable columns={columns} rows={data} />
     <PesoPesadoPagination />
   </div>;
 };
