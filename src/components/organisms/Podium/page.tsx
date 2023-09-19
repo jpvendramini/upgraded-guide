@@ -1,11 +1,3 @@
-"use client"
-import Description from '@components/atoms/Description/page';
-import { PodiumType } from '@components/atoms/PodiumCard/page';
-import Title from '@components/atoms/Title/page';
-import PodiumSession from '@components/molecules/PodiumSession/page';
-import { useFetchPesoPenaPodium } from '@hooks/useFetchPesoPenaPodium';
-import { useFetchPesoPesadoPodium } from '@hooks/useFetchPesoPesadoPodium';
-import { useMemo } from 'react';
 
 const PESO_PESADO_VALUES = [
   {
@@ -37,57 +29,71 @@ const PESO_PENA_VALUES = [
   }
 ]
 
-const Podium = () => {
-  const { data: pesoPesadoData } = useFetchPesoPesadoPodium();
-  const { data: pesoPenaData } = useFetchPesoPenaPodium();
-  const pesoPesadoPodium = useMemo<PodiumType[]>(() => {
-    if (!pesoPesadoData) return [];
-    const pesadoPodium = pesoPesadoData.content.map((pesoPesado, index) => {
-      const podium = {
-        email: pesoPesado.email,
-        iniciais: pesoPesado.email.substring(0, 2),
-        nota: pesoPesado.nota,
-        linguagem: pesoPesado.linguagem,
-        dataUltimoEnvio: pesoPesado.dataEnvio,
-        icone: PESO_PENA_VALUES[index].icone,
-        backgroundColor: PESO_PENA_VALUES[index].backgroundColor,
-      }
-      return podium;
-    })
-    return pesadoPodium;
-  }
-    , [pesoPesadoData])
-
-  const pesoPenaPodium = useMemo<PodiumType[]>(() => {
-    if (!pesoPenaData) return [];
-    const penaPodium = pesoPenaData.content.map((pesoPena, index) => {
-      const podium = {
-        email: pesoPena.email,
-        iniciais: pesoPena.email.substring(0, 2),
-        nota: pesoPena.nota,
-        linguagem: pesoPena.linguagem,
-        dataUltimoEnvio: pesoPena.dataEnvio,
-        icone: PESO_PESADO_VALUES[index].icone,
-        backgroundColor: PESO_PESADO_VALUES[index].backgroundColor,
-      }
-      return podium;
-    })
-    return penaPodium;
-  }
-    , [pesoPesadoData]);
-
-  return (
-    <div className="flex flex-col gap-4">
-      <div>
-        <Title title="Pódium" />
-        <Description value="O hall dos campeões!" />
-      </div>
-      <div className='flex flex-col gap-8'>
-        <PodiumSession podiumList={pesoPesadoPodium} />
-        <PodiumSession podiumList={pesoPenaPodium} />
-      </div>
-    </div>
-  )
+const Podium = async () => {
+  /*  const { access_token } = await getServerSession(authOptions);
+   console.log("teste 11", access_token);
+   const pesoPesadoPodium = await fetch(`${baseUrl}/ranking?categoria=PESO_PESADO&size=3`, {
+     headers: {
+       Authorizarion: `Bearer ${access_token}`
+     }
+   })
+     .then(response => response.json())
+     .then((result) => {
+       const pesadoPodium = result?.content.map((pesoPesado: any, index: any) => {
+         const podium = {
+           email: pesoPesado.userId,
+           iniciais: pesoPesado.userId.substring(0, 2),
+           nota: Number(pesoPesado.nota).toFixed(2),
+           linguagem: pesoPesado.linguagem,
+           dataUltimoEnvio: pesoPesado.dataEnvio,
+           icone: PESO_PESADO_VALUES[index].icone,
+           backgroundColor: PESO_PESADO_VALUES[index].backgroundColor,
+         }
+         return podium;
+       })
+       return pesadoPodium;
+     })
+     .catch(() => toast.error("Erro ao exibir Podium"));
+ 
+   const pesoPenaPodium = await fetch(`${baseUrl}/ranking?categoria=PESO_PENA&size=3`, {
+     headers: {
+       Authorizarion: `Bearer ${access_token}`
+     }
+   })
+     .then(response => response.json())
+     .then((result) => {
+       const penaPodium = result?.content.map((pena: any, index: any) => {
+         const podium = {
+           email: pena.userId,
+           iniciais: pena.userId.substring(0, 2),
+           nota: Number(pena.nota).toFixed(2),
+           linguagem: pena.linguagem,
+           dataUltimoEnvio: pena.dataEnvio,
+           icone: PESO_PENA_VALUES[index].icone,
+           backgroundColor: PESO_PENA_VALUES[index].backgroundColor,
+         }
+         return podium;
+       })
+       return penaPodium;
+     })
+     .catch(() => toast.error("Erro ao exibir Podium"));
+ 
+   if (!pesoPesadoPodium) return <Label value='Carregando...' />
+   if (!pesoPenaPodium) return <Label value='Carregando...' />
+ 
+   return (
+     <div className="flex flex-col gap-4">
+       <div>
+         <Title title="Pódium" />
+         <Description value="O hall dos campeões!" />
+       </div>
+       <div className='flex flex-col gap-8'>
+         <PodiumSession podiumList={pesoPesadoPodium} />
+         <PodiumSession podiumList={pesoPenaPodium} />
+       </div>
+     </div>
+   ) */
+  return <div>Dale</div>
 }
 
 export default Podium

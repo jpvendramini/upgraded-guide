@@ -20,8 +20,12 @@ const UploadButton = () => {
         var requestOptions = {
           method: 'POST',
           body: formdata,
+          headers: {
+            Authorizarion: `Bearer ${session?.access_token}`
+          }
         };
-        fetch(`${baseUrl}/submissoes`, requestOptions)
+        fetch(`${baseUrl}/submissoes`, requestOptions,
+        )
           .then(() => toast.success("Submissão feita com sucesso"))
           .catch(() => toast.error("Erro ao fazer submissão"))
           .finally(() => setLoading(false));

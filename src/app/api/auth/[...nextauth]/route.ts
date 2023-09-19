@@ -45,7 +45,6 @@ const authOptions = {
   callbacks: {
     async jwt({ token, account }: any) {
       const nowTimeStamp = Math.floor(Date.now() / 1000);
-
       if (account) {
         // account is only available the first time this callback is called on a new session (after the user signs in)
         token.decoded = jwt_decode(account.access_token);
@@ -72,7 +71,7 @@ const authOptions = {
     },
     async session({ session, token }: any) {
       // Send properties to the client
-      session.access_token = encrypt(token.access_token); // see utils/sessionTokenAccessor.js
+      session.access_token = token.access_token; // see utils/sessionTokenAccessor.js
       session.id_token = encrypt(token.id_token); // see utils/sessionTokenAccessor.js
       session.roles = token.decoded.realm_access.roles;
       session.error = token.error;

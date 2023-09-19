@@ -18,8 +18,8 @@ const PodiumCard = ({ email, iniciais, nota, dataUltimoEnvio, backgroundColor, i
                 <p className="font-bold font-sans text-[#151515] text-base mr-1 whitespace-nowrap overflow-hidden">{email}</p>
                 <p className="font-bold font-sans text-[#151515] text-base mr-1 whitespace-nowrap overflow-hidden">{linguagem}</p>
                 <div className="flex flex-col">
-                    <p className="font-sans text-white text-sm font-bold">{`P: ${nota}`}</p>
-                    <p className="font-sans text-white text-sm">{dataUltimoEnvio}</p>
+                    <p className="font-sans text-white text-sm font-bold whitespace-nowrap overflow-hidden">{`P: ${nota}`}</p>
+                    <p className="font-sans text-white text-sm whitespace-nowrap overflow-hidden">{dataUltimoEnvio}</p>
                 </div>
             </div>
             <div className="w-[2.5rem] -ml-2">
