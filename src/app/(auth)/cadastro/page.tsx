@@ -2,16 +2,14 @@
 import { keycloakSessionLogOut } from "@components/molecules/Profile/page";
 import { baseUrl } from "@server/api";
 import { signOut } from "next-auth/react";
-import Link from "next/link";
-import { useRouter, redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { toast } from "react-toastify";
 
 type CategoriaType = "PESO_PENA" | "PESO_PESADO" | null;
 
 const Cadastro = () => {
   let [categoria, setCategoria] = useState<CategoriaType>(null);
-  const [pageLoading, setPageLoading] = useState<boolean>(false);
+  const [pageLoading, setPageLoading] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
@@ -34,10 +32,7 @@ const Cadastro = () => {
           .then((result: any) => {
             if (result?.status === 200) router.push("/dashboard");
           })
-          .catch(() => setLoading(false))
-          .finally(() => {
-            setLoading(false);
-          });
+          .catch(() => setLoading(false));
       })
     );
   }, []);
@@ -56,8 +51,9 @@ const Cadastro = () => {
               router.push("/dashboard");
             }
           })
-          .catch((err) => {})
-          .finally(() => setPageLoading(false));
+          .catch(() => {
+            setPageLoading(false);
+          });
       })
     );
   }, []);
@@ -102,7 +98,6 @@ const Cadastro = () => {
             onClick={() => {
               categoria = "PESO_PESADO";
               setCategoria("PESO_PESADO");
-              console.log(categoria);
             }}
           >
             <p
@@ -141,7 +136,7 @@ const Cadastro = () => {
       <div className="flex gap-4">
         <button
           type="button"
-          className="w-40 h-16 rounded-full border-white border-2"
+          className="w-40 h-10 rounded-full border-white border-2"
           onClick={() => {
             keycloakSessionLogOut().then(() => signOut({ callbackUrl: "/" }));
           }}
@@ -151,16 +146,14 @@ const Cadastro = () => {
         <button
           type="button"
           disabled={isCategoriaNull || loading}
-          className={`w-40 h-16 rounded-full  border-2 ${
-            isCategoriaNull ? "border-[#666666]" : "border-white"
+          className={`w-40 h-10 rounded-full ${
+            isCategoriaNull
+              ? "bg-gradient-to-r from-[#7e7e7e] to-[#5d5d5d] text-white"
+              : "bg-gradient-to-r from-[#FF3D00] to-[#00A3FF]"
           }`}
           onClick={cadastrarUsuario}
         >
-          <p
-            className={`font-sans font-bold text-lg ${
-              isCategoriaNull ? "text-[#666666]" : "text-white"
-            }`}
-          >
+          <p className={`font-sans font-bold text-lg text-white`}>
             {loading ? "Enviando..." : "Confirmar"}
           </p>
         </button>

@@ -6,6 +6,7 @@ import {
   LineElement,
   LinearScale,
   PointElement,
+  ScaleChartOptions,
   Tooltip,
 } from "chart.js";
 import { useMemo } from "react";
@@ -26,6 +27,11 @@ type Props = {
 
 const options = {
   responsive: true,
+  scales: {
+    y: {
+      beginAtZero: true,
+    },
+  },
 };
 
 const LineChart = ({ linePoints }: Props) => {

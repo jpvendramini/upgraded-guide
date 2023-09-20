@@ -1,1 +1,1 @@
-export const baseUrl = "http://localhost:8080/v1";
+export const baseUrl = "https://api-rinha.dev.muralis.com.br/v1";

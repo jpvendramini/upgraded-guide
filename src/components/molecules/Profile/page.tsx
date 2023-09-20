@@ -1,5 +1,8 @@
 "use client";
+import { IconButton, Menu, MenuItem } from "@mui/material";
 import { signOut } from "next-auth/react";
+import Image from "next/image";
+import React, { useState } from "react";
 
 export async function keycloakSessionLogOut() {
   try {
@@ -10,15 +13,51 @@ export async function keycloakSessionLogOut() {
 }
 
 export default function Profile() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const open = Boolean(anchorEl);
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
-    <button
-      type="button"
-      onClick={() => {
-        keycloakSessionLogOut().then(() => signOut({ callbackUrl: "/" }));
-      }}
-    >
-      {/* TODO: adicionar ícone de profile e opções do menu */}
-      <p className="font-sans font-bold text-white text-2xl">Sair</p>
-    </button>
+    <div className="relative">
+      <IconButton
+        id="basic-button"
+        type="button"
+        onClick={handleClick}
+        aria-controls={open ? "basic-menu" : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? "true" : undefined}
+        className="flex justify-center items-center"
+      >
+        <Image
+          alt="profile image"
+          src="icons/profile.svg"
+          width={20}
+          height={20}
+        />
+      </IconButton>
+      <Menu
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          "aria-labelledby": "basic-button",
+        }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        transformOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <MenuItem
+          onClick={() => {
+            keycloakSessionLogOut().then(() => signOut({ callbackUrl: "/" }));
+          }}
+        >
+          Sair
+        </MenuItem>
+      </Menu>
+    </div>
   );
 }

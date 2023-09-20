@@ -24,12 +24,11 @@ export async function GET() {
       `${process.env.NEXTAUTH_URL}`
     )}`;
 
-    console.log(LOGOUT_URL);
-
     try {
       const resp = await fetch(LOGOUT_URL, { method: "GET" });
+      console.log("RESPONSE:", resp);
     } catch (err) {
-      console.error(err);
+      console.error("ERROR:", err);
       return new Response(null, { status: 500 });
     }
   }
