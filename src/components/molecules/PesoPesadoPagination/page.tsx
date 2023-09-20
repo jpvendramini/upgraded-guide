@@ -8,7 +8,7 @@ const PesoPesadoPagination = () => {
             <div className="font-sans font-bold text-white">{`Página: ${pesoPesadoPage}`}</div>
             <div className="flex gap-12 items-center justify-end">
                 <Pagination
-                    count={5}
+                    count={40}
                     page={pesoPesadoPage}
                     onChange={(_, newPage) => setPesoPesadoPage(newPage)}
                 />

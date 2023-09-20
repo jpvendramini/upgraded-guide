@@ -30,6 +30,7 @@ const options = {
   scales: {
     y: {
       beginAtZero: true,
+      max: 100,
     },
   },
 };

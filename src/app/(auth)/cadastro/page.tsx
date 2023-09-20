@@ -8,7 +8,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 type CategoriaType = "PESO_PENA" | "PESO_PESADO" | null;
 
 const Cadastro = () => {
-  let [categoria, setCategoria] = useState<CategoriaType>(null);
+  const [categoria, setCategoria] = useState<CategoriaType>(null);
   const [pageLoading, setPageLoading] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
@@ -21,7 +21,7 @@ const Cadastro = () => {
           method: "POST",
           body: JSON.stringify({
             email: result.user.email,
-            categoria,
+            categoria: categoria,
           }),
           headers: {
             Authorization: `Bearer ${result.access_token}`,
@@ -30,12 +30,12 @@ const Cadastro = () => {
         };
         fetch(`${baseUrl}/usuarios`, requestOptions)
           .then((result: any) => {
-            if (result?.status === 200) router.push("/dashboard");
+            if (result?.status === 201) router.push("/dashboard");
           })
-          .catch(() => setLoading(false));
+          .finally(() => setLoading(false));
       })
     );
-  }, []);
+  }, [categoria]);
 
   useEffect(() => {
     setPageLoading(true);
@@ -45,15 +45,12 @@ const Cadastro = () => {
           headers: {
             Authorization: `Bearer ${result.access_token}`,
           },
-        })
-          .then((res: any) => {
-            if (res?.status === 200) {
-              router.push("/dashboard");
-            }
-          })
-          .catch(() => {
-            setPageLoading(false);
-          });
+        }).then((res: any) => {
+          if (res?.status === 200) {
+            router.push("/dashboard");
+          }
+          setPageLoading(false);
+        });
       })
     );
   }, []);
@@ -73,6 +70,11 @@ const Cadastro = () => {
     return "Nenhuma categoria selecionada";
   }, [categoria]);
   const isCategoriaNull = useMemo<boolean>(() => !categoria, [categoria]);
+
+  // const handleSelecionaCategoria = (value: CategoriaType) => {
+  //   console.log(value);
+  //   setCategoria(value);
+  // };
 
   if (pageLoading)
     return (
@@ -96,7 +98,6 @@ const Cadastro = () => {
                 : "bg-white"
             }`}
             onClick={() => {
-              categoria = "PESO_PESADO";
               setCategoria("PESO_PESADO");
             }}
           >
@@ -116,7 +117,6 @@ const Cadastro = () => {
                 : "bg-white"
             }`}
             onClick={() => {
-              categoria = "PESO_PENA";
               setCategoria("PESO_PENA");
             }}
           >
