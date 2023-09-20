@@ -1,7 +1,7 @@
 "use client";
 import { signOut } from "next-auth/react";
 
-async function keycloakSessionLogOut() {
+export async function keycloakSessionLogOut() {
   try {
     await fetch(`/api/auth/logout`, { method: "GET" });
   } catch (err) {

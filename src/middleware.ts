@@ -9,16 +9,8 @@ export default async function middleware(
   const token = await getToken({ req });
   const isAuthenticated = !!token;
 
-  if (req.nextUrl.pathname.startsWith("/cadastro") && !isAuthenticated) {
-    return;
-  }
-
-  if (
-    (req.nextUrl.pathname.startsWith("/login") ||
-      req.nextUrl.pathname.startsWith("/cadastro")) &&
-    isAuthenticated
-  ) {
-    return NextResponse.redirect(new URL("/dashboard", req.url));
+  if (req.nextUrl.pathname.startsWith("/login") && isAuthenticated) {
+    return NextResponse.redirect(new URL("/cadastro", req.url));
   }
 
   const authMiddleware = await withAuth({
