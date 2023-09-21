@@ -1,6 +1,7 @@
 "use client";
 import Label from "@components/atoms/Label/page";
 import LineChart from "@components/atoms/LineChart/page";
+import { usePool } from "@contexts/PoolContext";
 import { baseUrl } from "@server/api";
 import { useEffect, useMemo, useState } from "react";
 
@@ -20,6 +21,7 @@ const EstatisticasCard = () => {
   const [data, setData] = useState([]);
   const [user, setUser] = useState<UserType>({ name: "", email: "" });
   const [linePoints, setLinePoints] = useState<number[]>([]);
+  const { depencyTreeNotifier } = usePool();
   useEffect(() => {
     fetch("/api/auth/session").then((response) =>
       response.json().then((result) => {
@@ -38,7 +40,7 @@ const EstatisticasCard = () => {
         });
       })
     );
-  }, []);
+  }, [depencyTreeNotifier]);
 
   const ultimaSubmissao = useMemo<UltimaSubmissaoType>(() => {
     const firstPosition: UltimaSubmissaoType = data[0];

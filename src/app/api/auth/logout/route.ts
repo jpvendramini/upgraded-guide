@@ -1,6 +1,6 @@
-import { authOptions } from "../[...nextauth]/route";
-import { getServerSession } from "next-auth";
 import { decrypt } from "@utils/encryption";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../[...nextauth]/route";
 
 async function getIdToken() {
   const session = await getServerSession(authOptions);
@@ -26,7 +26,6 @@ export async function GET() {
 
     try {
       const resp = await fetch(LOGOUT_URL, { method: "GET" });
-      console.log("RESPONSE:", resp);
     } catch (err) {
       console.error("ERROR:", err);
       return new Response(null, { status: 500 });
