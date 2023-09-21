@@ -5,7 +5,7 @@ import { contributors } from "./contributors";
 
 const Contributors = () => {
   return (
-    <div className="grid grid-cols-2 w-full font-sans gap-8">
+    <div className="grid grid-cols-2 w-full font-sans gap-12">
       <Link
         href="/dashboard"
         className="fixed top-10 left-10 text-white flex gap-2 font-bold justify-center items-center"
@@ -45,7 +45,7 @@ const Contributors = () => {
               href={contributor.linkedin || contributor.github}
               target="_blank"
             >
-              <h2 className="font-bold">{contributor.name}</h2>
+              <h2 className="font-bold whitespace-nowrap">{contributor.name}</h2>
             </Link>
             <p className="text-sm capitalize">{contributor.role}</p>
           </div>
