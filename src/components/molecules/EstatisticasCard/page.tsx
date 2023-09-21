@@ -39,7 +39,9 @@ const EstatisticasCard = () => {
   const [user, setUser] = useState<UserType>({ name: "", email: "" });
   const [linePoints, setLinePoints] = useState<number[]>([]);
   const [dates, setDates] = useState<string[]>([]);
-  const [selectedMenu, setSelectedMenu] = useState<'grafico' | 'lista'>('grafico');
+  const [selectedMenu, setSelectedMenu] = useState<"grafico" | "lista">(
+    "grafico",
+  );
   const { depencyTreeNotifier } = usePool();
   useEffect(() => {
     fetch("/api/auth/session").then((response) =>
@@ -71,7 +73,7 @@ const EstatisticasCard = () => {
   }, [depencyTreeNotifier]);
 
   const ultimaSubmissao = useMemo<UltimaSubmissaoType>(() => {
-    const { dataEnvio, linguagem, nota, situacao } = data[0] || {};
+    const { dataEnvio, linguagem, nota, situacao } = data[0];
     const firstPosition: UltimaSubmissaoType = {
       dataEnvio,
       linguagem,
@@ -86,18 +88,34 @@ const EstatisticasCard = () => {
   return (
     <div className="h-[230px] bg-[#1f232a] rounded-lg flex px-6 py-3 justify-end relative">
       <div className="flex flex-col justify-start w-2/3 h-full">
-        <div className="flex gap-2">
-          <LabelButton value="Pontuação por envio" opaque={selectedMenu !== 'grafico'} onClick={() => setSelectedMenu('grafico')} />
-          <LabelButton value="Tabela de Submissões" opaque={selectedMenu !== 'lista'} onClick={() => setSelectedMenu('lista')} />
-        </div>
-        <div className="relative">
-          <div className={`absolute flex flex-col gap-2 w-full h-full overflow-y-auto ${selectedMenu === 'lista' ? 'visible' : 'invisible -z-10'}`}>
-            <SubmissoesDataTable data={data} />
-          </div>
-          <div className={`${selectedMenu === 'grafico' ? 'visible' : 'invisible'}`}>
+        {linePoints.length > 0 ? (
+          <>
+            <div className="flex gap-2">
+              <LabelButton
+                value="Pontuação por envio"
+                opaque={selectedMenu !== "grafico"}
+                onClick={() => setSelectedMenu("grafico")}
+              />
+              <LabelButton
+                value="Tabela de Submissões"
+                opaque={selectedMenu !== "lista"}
+                onClick={() => setSelectedMenu("lista")}
+              />
+            </div>
+            <div className="relative">
+              <div
+                className={`absolute flex flex-col gap-2 w-full h-full overflow-y-auto ${
+                  selectedMenu === "lista" ? "visible" : "invisible -z-10"
+                }`}
+              >
+                <SubmissoesDataTable data={data} />
+              </div>
+            </div>
             <LineChart linePoints={linePoints} dates={dates} />
-          </div>
-        </div>
+          </>
+        ) : (
+          <Label value="Usuário sem submissões" />
+        )}
       </div>
       <div className="flex w-1/2 flex-col justify-start gap-2 pl-3 pt-6">
         <div className="flex gap-2 w-52">
@@ -136,7 +154,9 @@ const EstatisticasCard = () => {
       </div>
       {ultimaSubmissao && (
         <div className="flex items-center gap-2 absolute bottom-6 right-16">
-          <Label value={ultimaSubmissao?.nota ? "Última pontuação: " : "Situação: "} />
+          <Label
+            value={ultimaSubmissao?.nota ? "Última pontuação: " : "Situação: "}
+          />
           <p className="bg-gradient-to-r from-[#FF3D00] to-[#00A3FF] text-transparent bg-clip-text font-sans font-bold">
             {ultimaSubmissao?.nota
               ? Number(ultimaSubmissao.nota).toFixed(2)
