@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 type Props = {
@@ -11,12 +12,14 @@ const LoginLogo: React.FC<Props> = ({ size }) => {
     sm: { width: 100, height: 30 },
   };
   return (
-    <Image
-      alt="profile image"
-      src={"icons/logo-login.svg"}
-      width={logoSizes[size || "lg"].width}
-      height={logoSizes[size || "lg"].height}
-    />
+    <Link href="https://muralis.com.br/" target="_blank">
+      <Image
+        alt="profile image"
+        src={"icons/logo-login.svg"}
+        width={logoSizes[size || "lg"].width}
+        height={logoSizes[size || "lg"].height}
+      />
+    </Link>
   );
 };
 
