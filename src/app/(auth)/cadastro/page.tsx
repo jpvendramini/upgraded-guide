@@ -71,11 +71,6 @@ const Cadastro = () => {
   }, [categoria]);
   const isCategoriaNull = useMemo<boolean>(() => !categoria, [categoria]);
 
-  // const handleSelecionaCategoria = (value: CategoriaType) => {
-  //   console.log(value);
-  //   setCategoria(value);
-  // };
-
   if (pageLoading)
     return (
       <div className="text-white font-sans font-bold text-lg">
@@ -92,38 +87,34 @@ const Cadastro = () => {
         <div className="flex gap-4">
           <button
             type="button"
-            className={`w-40 h-16 rounded-xl  ${
-              isPesoPesado
+            className={`w-40 h-16 rounded-xl  ${isPesoPesado
                 ? "bg-gradient-to-r from-[#FF3D00] to-[#00A3FF]"
                 : "bg-white"
-            }`}
+              }`}
             onClick={() => {
               setCategoria("PESO_PESADO");
             }}
           >
             <p
-              className={`font-sans font-bold text-lg ${
-                isPesoPesado ? "text-white" : "text-[#061127]"
-              }`}
+              className={`font-sans font-bold text-lg ${isPesoPesado ? "text-white" : "text-[#061127]"
+                }`}
             >
               Peso Pesado
             </p>
           </button>
           <button
             type="button"
-            className={`w-40 h-16 rounded-xl  ${
-              isPesoPena
+            className={`w-40 h-16 rounded-xl  ${isPesoPena
                 ? "bg-gradient-to-r from-[#FF3D00] to-[#00A3FF]"
                 : "bg-white"
-            }`}
+              }`}
             onClick={() => {
               setCategoria("PESO_PENA");
             }}
           >
             <p
-              className={`font-sans font-bold text-lg ${
-                isPesoPena ? "text-white" : "text-[#061127]"
-              }`}
+              className={`font-sans font-bold text-lg ${isPesoPena ? "text-white" : "text-[#061127]"
+                }`}
             >
               Peso Pena
             </p>
@@ -146,11 +137,10 @@ const Cadastro = () => {
         <button
           type="button"
           disabled={isCategoriaNull || loading}
-          className={`w-40 h-10 rounded-full ${
-            isCategoriaNull
+          className={`w-40 h-10 rounded-full ${isCategoriaNull
               ? "bg-gradient-to-r from-[#7e7e7e] to-[#5d5d5d] text-white"
               : "bg-gradient-to-r from-[#FF3D00] to-[#00A3FF]"
-          }`}
+            }`}
           onClick={cadastrarUsuario}
         >
           <p className={`font-sans font-bold text-lg text-white`}>

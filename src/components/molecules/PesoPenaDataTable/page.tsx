@@ -2,6 +2,7 @@
 import Label from "@components/atoms/Label/page";
 import PesoPenaIcon from "@components/atoms/PesoPenaIcon/page";
 import DataTable from "@components/molecules/DataTable/page";
+import { usePool } from "@contexts/PoolContext";
 import { useRankingContext } from "@contexts/RankingContext";
 import { baseUrl } from "@server/api";
 import { useEffect, useState } from "react";
@@ -19,6 +20,7 @@ const PesoPenaDataTable = () => {
 
   const { pesoPenaPage } = useRankingContext();
   const [data, setData] = useState(undefined);
+  const { depencyTreeNotifier } = usePool();
 
   useEffect(() => {
     fetch('/api/auth/session')
@@ -45,7 +47,7 @@ const PesoPenaDataTable = () => {
           })
       })
 
-  }, [pesoPenaPage])
+  }, [pesoPenaPage, depencyTreeNotifier])
 
   if (!data) return <Label value="Carregando..." />
 

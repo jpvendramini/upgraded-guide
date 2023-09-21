@@ -2,6 +2,7 @@
 import Label from "@components/atoms/Label/page";
 import PesoPesadoIcon from "@components/atoms/PesoPesadoIcon/page";
 import DataTable from "@components/molecules/DataTable/page";
+import { usePool } from "@contexts/PoolContext";
 import { useRankingContext } from "@contexts/RankingContext";
 import { baseUrl } from "@server/api";
 import { useEffect, useState } from "react";
@@ -18,14 +19,14 @@ const PesoPesadoDataTable = () => {
   ];
   const { pesoPesadoPage } = useRankingContext();
   const [data, setData] = useState(undefined);
+  const { depencyTreeNotifier } = usePool();
 
   useEffect(() => {
     fetch("/api/auth/session")
       .then((response) => response.json())
       .then((response) => {
         fetch(
-          `${baseUrl}/ranking?categoria=PESO_PESADO&size=4&page=${
-            pesoPesadoPage - 1
+          `${baseUrl}/ranking?categoria=PESO_PESADO&size=4&page=${pesoPesadoPage - 1
           }`,
           {
             headers: {
@@ -48,7 +49,7 @@ const PesoPesadoDataTable = () => {
             setData(pesoPesadoData);
           });
       });
-  }, [pesoPesadoPage]);
+  }, [pesoPesadoPage, depencyTreeNotifier]);
 
   if (!data) return <Label value="Carregando..." />;
 

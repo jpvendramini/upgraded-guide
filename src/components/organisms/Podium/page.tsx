@@ -3,6 +3,7 @@ import Description from "@components/atoms/Description/page";
 import Label from "@components/atoms/Label/page";
 import Title from "@components/atoms/Title/page";
 import PodiumSession from "@components/molecules/PodiumSession/page";
+import { usePool } from "@contexts/PoolContext";
 import { baseUrl } from "@server/api";
 import { useEffect, useState } from "react";
 
@@ -39,6 +40,7 @@ const PESO_PENA_VALUES = [
 const Podium = () => {
   const [pesoPesadoPodium, setPesoPesadoPodium] = useState(undefined);
   const [pesoPenaPodium, setPesoPenaPodium] = useState(undefined);
+  const { depencyTreeNotifier } = usePool();
   useEffect(() => {
     fetch("/api/auth/session").then((response) =>
       response.json().then((result) => {
@@ -67,7 +69,7 @@ const Podium = () => {
         });
       })
     );
-  }, []);
+  }, [depencyTreeNotifier]);
 
   useEffect(() => {
     fetch("/api/auth/session").then((response) =>
@@ -97,7 +99,7 @@ const Podium = () => {
         });
       })
     );
-  }, []);
+  }, [depencyTreeNotifier]);
 
   if (!pesoPesadoPodium) return <Label value="Carregando..." />;
   if (!pesoPenaPodium) return <Label value="Carregando..." />;
