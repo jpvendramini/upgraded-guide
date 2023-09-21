@@ -80,6 +80,9 @@ const authOptions = {
     pages: {
       signIn: "/login",
     },
+    async signIn({ user }: any) {
+      return !!user?.email && user.email.includes("@muralis.com.br");
+    },
   },
 };
 

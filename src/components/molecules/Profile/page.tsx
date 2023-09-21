@@ -2,6 +2,7 @@
 import { IconButton, Menu, MenuItem } from "@mui/material";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 export async function keycloakSessionLogOut() {
@@ -15,6 +16,7 @@ export async function keycloakSessionLogOut() {
 export default function Profile() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const router = useRouter();
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -50,6 +52,9 @@ export default function Profile() {
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         transformOrigin={{ vertical: "top", horizontal: "center" }}
       >
+        <MenuItem onClick={() => router.push("/contributors")}>
+          Contribuidores
+        </MenuItem>
         <MenuItem
           onClick={() => {
             keycloakSessionLogOut().then(() => signOut({ callbackUrl: "/" }));
