@@ -8,6 +8,7 @@ import { baseUrl } from "@server/api";
 import { useEffect, useState } from "react";
 import { ColumnType } from "../DataTable/types";
 import PesoPesadoPagination from "../PesoPesadoPagination/page";
+import { formatDate } from "@components/utils/date";
 
 const PesoPesadoDataTable = () => {
   const columns: ColumnType[] = [
@@ -40,7 +41,7 @@ const PesoPesadoDataTable = () => {
               const rank = {
                 email: pesoPesado.userId.replace('@muralis.com.br', ''),
                 nota: Number(pesoPesado.nota).toFixed(2),
-                dataEnvio: pesoPesado.dataEnvio,
+                dataEnvio: formatDate(pesoPesado.dataEnvio, 'DD/MM HH:mm'),
                 linguagem: pesoPesado.linguagem.toUpperCase(),
                 categoria: <PesoPesadoIcon />,
               };

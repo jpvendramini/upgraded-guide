@@ -1,4 +1,5 @@
 import PodiumCard, { PodiumType } from "@components/atoms/PodiumCard/page";
+import { formatDate } from "@components/utils/date";
 
 type Props = {
     podiumList: PodiumType[]
@@ -9,7 +10,7 @@ const PodiumSession = ({ podiumList }: Props) => {
         {podiumList.map((podium, index) => (
             <PodiumCard
                 key={`podium-session-${index}`}
-                dataUltimoEnvio={podium.dataUltimoEnvio}
+                dataUltimoEnvio={formatDate(podium.dataUltimoEnvio, 'DD/MM HH:mm')}
                 icone={podium.icone}
                 iniciais={podium.iniciais}
                 email={podium.email}

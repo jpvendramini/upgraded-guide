@@ -6,6 +6,7 @@ import { usePool } from "@contexts/PoolContext";
 import { baseUrl } from "@server/api";
 import { useEffect, useMemo, useState } from "react";
 import SubmissoesDataTable from "../SubmissoesDataTable/page";
+import { formatDate } from "@components/utils/date";
 
 type UserType = {
   email: string;
@@ -54,7 +55,7 @@ const EstatisticasCard = () => {
         }).then((result) => {
           if (!!result) {
             result.json().then((res: SubmissaoType[]) => {
-              setData(res);
+              setData(res.map((item) => ({ ...item, dataEnvio: formatDate(item.dataEnvio, 'DD/MM HH:mm') })));
               const newLinePoints = res
                 .filter((item) => !!item?.nota)
                 .map((item) => Number(item.nota))
