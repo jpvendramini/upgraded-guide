@@ -6,8 +6,8 @@ import { SubmissaoType } from "../EstatisticasCard/page";
 function SubmissoesDataTable({ data }: { data: SubmissaoType[] }) {
   const columns: ColumnType[] = [
     { title: "Nota", alignment: "left", width: "20%" },
-    { title: "Data Envio", alignment: "left", width: "50%" },
-    { title: "Linguagem", alignment: "left", width: "30%" },
+    { title: "Data Envio", alignment: "left", width: "55%" },
+    { title: "Linguagem", alignment: "left", width: "25%" },
   ];
 
   const rows: RowType[] = data.map((submissao) => {
