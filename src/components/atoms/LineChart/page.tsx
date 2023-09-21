@@ -52,7 +52,7 @@ const LineChart = ({ linePoints, dates }: Props) => {
     };
     return data;
   }, []);
-  return <Line options={options} data={lineData} />;
+  return <Line options={options} data={lineData} />
 };
 
 export default LineChart;

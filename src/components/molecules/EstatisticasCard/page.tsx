@@ -1,9 +1,11 @@
 "use client";
 import Label from "@components/atoms/Label/page";
+import LabelButton from "@components/atoms/LabelButton/page";
 import LineChart from "@components/atoms/LineChart/page";
 import { usePool } from "@contexts/PoolContext";
 import { baseUrl } from "@server/api";
 import { useEffect, useMemo, useState } from "react";
+import SubmissoesDataTable from "../SubmissoesDataTable/page";
 
 type UserType = {
   email: string;
@@ -17,7 +19,7 @@ type UltimaSubmissaoType = {
   situacao: string;
 };
 
-type SubmissaoType = {
+export type SubmissaoType = {
   id: string;
   situacao: string;
   dataEnvio: string;
@@ -37,6 +39,7 @@ const EstatisticasCard = () => {
   const [user, setUser] = useState<UserType>({ name: "", email: "" });
   const [linePoints, setLinePoints] = useState<number[]>([]);
   const [dates, setDates] = useState<string[]>([]);
+  const [selectedMenu, setSelectedMenu] = useState<'grafico' | 'lista'>('grafico');
   const { depencyTreeNotifier } = usePool();
   useEffect(() => {
     fetch("/api/auth/session").then((response) =>
@@ -81,16 +84,20 @@ const EstatisticasCard = () => {
   }, [data]);
 
   return (
-    <div className="h-[230px] bg-[#3D3D3D80] rounded-lg flex px-6 py-3 justify-end relative">
-      <div className="flex flex-col justify-start w-2/3">
-        <Label value="Pontuação por envio" />
-        {linePoints.length > 0 ? (
-          <LineChart linePoints={linePoints} dates={dates} />
-        ) : (
-          <p className="font-sans font-bold text-sm text-[#666666]">
-            Usuário sem submissões
-          </p>
-        )}
+    <div className="h-[230px] bg-[#1f232a] rounded-lg flex px-6 py-3 justify-end relative">
+      <div className="flex flex-col justify-start w-2/3 h-full">
+        <div className="flex gap-2">
+          <LabelButton value="Pontuação por envio" opaque={selectedMenu !== 'grafico'} onClick={() => setSelectedMenu('grafico')} />
+          <LabelButton value="Tabela de Submissões" opaque={selectedMenu !== 'lista'} onClick={() => setSelectedMenu('lista')} />
+        </div>
+        <div className="relative">
+          <div className={`absolute flex flex-col gap-2 w-full h-full overflow-y-auto ${selectedMenu === 'lista' ? 'visible' : 'invisible -z-10'}`}>
+            <SubmissoesDataTable data={data} />
+          </div>
+          <div className={`${selectedMenu === 'grafico' ? 'visible' : 'invisible'}`}>
+            <LineChart linePoints={linePoints} dates={dates} />
+          </div>
+        </div>
       </div>
       <div className="flex w-1/2 flex-col justify-start gap-2 pl-3 pt-6">
         <div className="flex gap-2 w-52">
@@ -128,8 +135,8 @@ const EstatisticasCard = () => {
         )}
       </div>
       {ultimaSubmissao && (
-        <div className="flex items-center gap-2 absolute bottom-6 right-20">
-          <Label value="Pontuação: " />
+        <div className="flex items-center gap-2 absolute bottom-6 right-16">
+          <Label value={ultimaSubmissao?.nota ? "Última pontuação: " : "Situação: "} />
           <p className="bg-gradient-to-r from-[#FF3D00] to-[#00A3FF] text-transparent bg-clip-text font-sans font-bold">
             {ultimaSubmissao?.nota
               ? Number(ultimaSubmissao.nota).toFixed(2)
