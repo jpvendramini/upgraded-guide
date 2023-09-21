@@ -19,6 +19,7 @@ const PesoPesadoDataTable = () => {
   ];
   const { pesoPesadoPage } = useRankingContext();
   const [data, setData] = useState(undefined);
+  const [totalPages, setTotalPages] = useState(0);
   const { depencyTreeNotifier } = usePool();
 
   useEffect(() => {
@@ -47,6 +48,7 @@ const PesoPesadoDataTable = () => {
               return rank;
             });
             setData(pesoPesadoData);
+            setTotalPages(result?.totalPages);
           });
       });
   }, [pesoPesadoPage, depencyTreeNotifier]);
@@ -56,7 +58,7 @@ const PesoPesadoDataTable = () => {
   return (
     <div className="bg-[#3D3D3D80] rounded-xl h-[390px] flex flex-col justify-between">
       <DataTable columns={columns} rows={data} />
-      <PesoPesadoPagination />
+      <PesoPesadoPagination totalPages={totalPages} />
     </div>
   );
 };
