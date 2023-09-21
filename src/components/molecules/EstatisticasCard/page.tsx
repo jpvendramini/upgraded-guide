@@ -103,13 +103,15 @@ const EstatisticasCard = () => {
             </div>
             <div className="relative">
               <div
-                className={`absolute flex flex-col gap-2 w-full h-40 overflow-y-auto ${selectedMenu === "lista" ? "visible" : "invisible -z-10"
+                className={`absolute flex flex-col gap-2 w-full h-48 overflow-y-auto ${selectedMenu === "lista" ? "visible z-20" : "invisible -z-10"
                   }`}
               >
                 <SubmissoesDataTable data={data} />
               </div>
+              <div className="absolute w-80 top-4">
+                <LineChart linePoints={linePoints} dates={dates} />
+              </div>
             </div>
-            <LineChart linePoints={linePoints} dates={dates} />
           </>
         ) : (
           <Label value="Usuário sem submissões" />
