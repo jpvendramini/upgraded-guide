@@ -23,6 +23,7 @@ ChartJS.register(
 
 type Props = {
   linePoints: number[];
+  dates: string[];
 };
 
 const options = {
@@ -35,11 +36,10 @@ const options = {
   },
 };
 
-const LineChart = ({ linePoints }: Props) => {
+const LineChart = ({ linePoints, dates }: Props) => {
   const lineData = useMemo(() => {
-    const labels = linePoints.map(() => "");
     const data = {
-      labels,
+      labels: dates || linePoints.map(() => ""),
       datasets: [
         {
           fill: true,

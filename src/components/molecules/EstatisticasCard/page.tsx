@@ -11,16 +11,32 @@ type UserType = {
 };
 
 type UltimaSubmissaoType = {
-  nota: number;
+  nota?: number;
   dataEnvio: string;
   linguagem: string;
   situacao: string;
 };
 
+type SubmissaoType = {
+  id: string;
+  situacao: string;
+  dataEnvio: string;
+  userId: string;
+  linguagem: string;
+  categoria: string;
+  nota?: number;
+  metricas?: {
+    correctness: string;
+    performance: string;
+    stability: string;
+  };
+};
+
 const EstatisticasCard = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<SubmissaoType[]>([]);
   const [user, setUser] = useState<UserType>({ name: "", email: "" });
   const [linePoints, setLinePoints] = useState<number[]>([]);
+  const [dates, setDates] = useState<string[]>([]);
   const { depencyTreeNotifier } = usePool();
   useEffect(() => {
     fetch("/api/auth/session").then((response) =>
@@ -32,18 +48,33 @@ const EstatisticasCard = () => {
           },
         }).then((result) => {
           if (!!result) {
-            result.json().then((res) => {
+            result.json().then((res: SubmissaoType[]) => {
               setData(res);
-              setLinePoints(res?.map((item: any) => Number(item.nota)));
+              const newLinePoints = res
+                .filter((item) => !!item?.nota)
+                .map((item) => Number(item.nota))
+                .reverse();
+              setLinePoints(newLinePoints);
+              const newDates = res
+                .filter((item) => !!item?.nota)
+                .map((item) => item.dataEnvio.substring(0, 5))
+                .reverse();
+              setDates(newDates);
             });
           }
         });
-      })
+      }),
     );
   }, [depencyTreeNotifier]);
 
   const ultimaSubmissao = useMemo<UltimaSubmissaoType>(() => {
-    const firstPosition: UltimaSubmissaoType = data[0];
+    const { dataEnvio, linguagem, nota, situacao } = data[0] || {};
+    const firstPosition: UltimaSubmissaoType = {
+      dataEnvio,
+      linguagem,
+      nota,
+      situacao,
+    };
     if (!data || !firstPosition)
       return { dataEnvio: "", linguagem: "", nota: 0, situacao: "" };
     return firstPosition;
@@ -54,7 +85,7 @@ const EstatisticasCard = () => {
       <div className="flex flex-col justify-start w-2/3">
         <Label value="Pontuação por envio" />
         {linePoints.length > 0 ? (
-          <LineChart linePoints={linePoints} />
+          <LineChart linePoints={linePoints} dates={dates} />
         ) : (
           <p className="font-sans font-bold text-sm text-[#666666]">
             Usuário sem submissões
