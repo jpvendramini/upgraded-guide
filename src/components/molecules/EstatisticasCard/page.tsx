@@ -73,6 +73,7 @@ const EstatisticasCard = () => {
   }, [depencyTreeNotifier]);
 
   const ultimaSubmissao = useMemo<UltimaSubmissaoType>(() => {
+    if (!data || data.length === 0) return { dataEnvio: "", linguagem: "", nota: 0, situacao: "" };
     const { dataEnvio, linguagem, nota, situacao } = data[0];
     const firstPosition: UltimaSubmissaoType = {
       dataEnvio,
@@ -80,8 +81,6 @@ const EstatisticasCard = () => {
       nota,
       situacao,
     };
-    if (!data || !firstPosition)
-      return { dataEnvio: "", linguagem: "", nota: 0, situacao: "" };
     return firstPosition;
   }, [data]);
 
@@ -104,9 +103,8 @@ const EstatisticasCard = () => {
             </div>
             <div className="relative">
               <div
-                className={`absolute flex flex-col gap-2 w-full h-full overflow-y-auto ${
-                  selectedMenu === "lista" ? "visible" : "invisible -z-10"
-                }`}
+                className={`absolute flex flex-col gap-2 w-full h-full overflow-y-auto ${selectedMenu === "lista" ? "visible" : "invisible -z-10"
+                  }`}
               >
                 <SubmissoesDataTable data={data} />
               </div>
