@@ -73,7 +73,7 @@ const EstatisticasCard = () => {
   }, [depencyTreeNotifier]);
 
   const ultimaSubmissao = useMemo<UltimaSubmissaoType>(() => {
-    const { dataEnvio, linguagem, nota, situacao } = data[0] || {};
+    const { dataEnvio, linguagem, nota, situacao } = data[0];
     const firstPosition: UltimaSubmissaoType = {
       dataEnvio,
       linguagem,
