@@ -160,12 +160,21 @@ const EstatisticasCard = () => {
           <p className="bg-gradient-to-r from-[#FF3D00] to-[#00A3FF] text-transparent bg-clip-text font-sans font-bold">
             {ultimaSubmissao?.nota
               ? Number(ultimaSubmissao.nota).toFixed(2)
-              : ultimaSubmissao.situacao}
+              : normalizeSituacao(ultimaSubmissao.situacao)}
           </p>
         </div>
       )}
     </div>
   );
-};
+}
+
+function normalizeSituacao(situacao: string) {
+  const situacoes: { [key: string]: string } = {
+    'AGUARDANDO_PROCESSAMENTO': 'Aguardando...',
+    'PROCESSANDO': 'Processando...',
+    'FALHA': 'Falha',
+  }
+  return situacoes[situacao];
+}
 
 export default EstatisticasCard;
