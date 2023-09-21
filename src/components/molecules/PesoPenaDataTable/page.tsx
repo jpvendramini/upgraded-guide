@@ -8,6 +8,7 @@ import { baseUrl } from "@server/api";
 import { useEffect, useState } from "react";
 import { ColumnType } from "../DataTable/types";
 import PesoPenaPagination from "../PesoPenaPagination/page";
+import { formatDate } from "@components/utils/date";
 
 const PesoPenaDataTable = () => {
   const columns: ColumnType[] = [
@@ -38,7 +39,7 @@ const PesoPenaDataTable = () => {
               const rank = {
                 email: pesoPena.userId,
                 nota: Number(pesoPena.nota).toFixed(2),
-                dataEnvio: pesoPena.dataEnvio,
+                dataEnvio: formatDate(pesoPena.dataEnvio, 'DD/MM HH:mm'),
                 linguagem: pesoPena.linguagem,
                 categoria: <PesoPenaIcon />
               }
