@@ -11,10 +11,10 @@ import PesoPesadoPagination from "../PesoPesadoPagination/page";
 
 const PesoPesadoDataTable = () => {
   const columns: ColumnType[] = [
-    { title: "Email", alignment: "left", width: "20%" },
+    { title: "Email", alignment: "left", width: "26%" },
     { title: "Nota", alignment: "left", width: "8%" },
-    { title: "Data Envio", alignment: "left", width: "18%" },
-    { title: "Linguagem", alignment: "left", width: "18%" },
+    { title: "Data Envio", alignment: "left", width: "15%" },
+    { title: "Linguagem", alignment: "left", width: "15%" },
     { title: "Categoria", alignment: "center", width: "10%" },
   ];
   const { pesoPesadoPage } = useRankingContext();
@@ -38,10 +38,10 @@ const PesoPesadoDataTable = () => {
           .then((result) => {
             const pesoPesadoData = result?.content.map((pesoPesado: any) => {
               const rank = {
-                email: pesoPesado.userId,
+                email: pesoPesado.userId.replace('@muralis.com.br', ''),
                 nota: Number(pesoPesado.nota).toFixed(2),
                 dataEnvio: pesoPesado.dataEnvio,
-                linguagem: pesoPesado.linguagem,
+                linguagem: pesoPesado.linguagem.toUpperCase(),
                 categoria: <PesoPesadoIcon />,
               };
               return rank;
