@@ -49,6 +49,9 @@ const Cadastro = () => {
           if (res?.status === 200) {
             router.push("/dashboard");
           }
+          if (res?.status === 401) {
+            keycloakSessionLogOut().then(() => signOut({ callbackUrl: "/" }));
+          }
           setPageLoading(false);
         });
       })
@@ -88,8 +91,8 @@ const Cadastro = () => {
           <button
             type="button"
             className={`w-40 h-16 rounded-xl  ${isPesoPesado
-                ? "bg-gradient-to-r from-[#FF3D00] to-[#00A3FF]"
-                : "bg-white"
+              ? "bg-gradient-to-r from-[#FF3D00] to-[#00A3FF]"
+              : "bg-white"
               }`}
             onClick={() => {
               setCategoria("PESO_PESADO");
@@ -105,8 +108,8 @@ const Cadastro = () => {
           <button
             type="button"
             className={`w-40 h-16 rounded-xl  ${isPesoPena
-                ? "bg-gradient-to-r from-[#FF3D00] to-[#00A3FF]"
-                : "bg-white"
+              ? "bg-gradient-to-r from-[#FF3D00] to-[#00A3FF]"
+              : "bg-white"
               }`}
             onClick={() => {
               setCategoria("PESO_PENA");
@@ -138,8 +141,8 @@ const Cadastro = () => {
           type="button"
           disabled={isCategoriaNull || loading}
           className={`w-40 h-10 rounded-full ${isCategoriaNull
-              ? "bg-gradient-to-r from-[#7e7e7e] to-[#5d5d5d] text-white"
-              : "bg-gradient-to-r from-[#FF3D00] to-[#00A3FF]"
+            ? "bg-gradient-to-r from-[#7e7e7e] to-[#5d5d5d] text-white"
+            : "bg-gradient-to-r from-[#FF3D00] to-[#00A3FF]"
             }`}
           onClick={cadastrarUsuario}
         >
