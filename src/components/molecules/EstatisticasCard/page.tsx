@@ -104,7 +104,7 @@ const EstatisticasCard = () => {
             </div>
             <div className="relative">
               <div
-                className={`absolute flex flex-col gap-2 w-full h-48 overflow-y-auto ${selectedMenu === "lista" ? "visible z-20" : "invisible -z-10"
+                className={`absolute flex flex-col gap-2 w-[19.5rem] h-48 overflow-y-auto ${selectedMenu === "lista" ? "visible z-20" : "invisible -z-10"
                   }`}
               >
                 <SubmissoesDataTable data={data} />

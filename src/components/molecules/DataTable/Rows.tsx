@@ -21,7 +21,7 @@ const Rows: React.FC<Props> = ({
     <>
       {rows.map((row, index) => (
         <div
-          className={`${index === 0 ? "border-[#FFFFFF]": "border-[#666666]"} flex justify-between items-center border-t border-solid  w-full p-5 text-sm font-normal text-bg-default font-sans hover:shadow-level-0 transition-all duration-300 ease-out`}
+          className={`${index === 0 ? "border-[#FFFFFF]": "border-[#666666]"} bg-[#1f232a] flex justify-between items-center border-t border-solid  w-full p-5 text-sm font-normal text-bg-default font-sans hover:shadow-level-0 transition-all duration-300 ease-out`}
           key={`${`${index}row`}`}
         >
           {columns.map((column, i) => (
