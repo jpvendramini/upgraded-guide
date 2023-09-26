@@ -16,6 +16,13 @@ export const contributors = [
     linkedin: "https://br.linkedin.com/in/davisson-medeiros-49674b8b",
   },
   {
+    name: "Lucas Monaro",
+    photo: `${PROFILE_IMAGE_PATH}lucas.png`,
+    role: "Organização",
+    github: "",
+    linkedin: "https://www.linkedin.com/in/lucas-monaro",
+  },
+  {
     name: "João Pedro Vendramini",
     photo: `${PROFILE_IMAGE_PATH}joao.jpg`,
     role: "Frontend Developer • UI/UX",
