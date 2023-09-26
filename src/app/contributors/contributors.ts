@@ -9,20 +9,6 @@ export const contributors = [
     linkedin: "https://www.linkedin.com/in/pablowinck/",
   },
   {
-    name: "Davisson Medeiros",
-    photo: `${PROFILE_IMAGE_PATH}davisson.png`,
-    role: "Organização • Techtalker",
-    github: "",
-    linkedin: "https://br.linkedin.com/in/davisson-medeiros-49674b8b",
-  },
-  {
-    name: "Lucas Monaro",
-    photo: `${PROFILE_IMAGE_PATH}lucas.png`,
-    role: "Organização",
-    github: "",
-    linkedin: "https://www.linkedin.com/in/lucas-monaro",
-  },
-  {
     name: "João Pedro Vendramini",
     photo: `${PROFILE_IMAGE_PATH}joao.jpg`,
     role: "Frontend Developer • UI/UX",
@@ -42,6 +28,13 @@ export const contributors = [
     role: "Backend developer • QA",
     github: "",
     linkedin: "https://www.linkedin.com/in/rafael-takahashi-8567b6196",
+  },
+  {
+    name: "Davisson Medeiros",
+    photo: `${PROFILE_IMAGE_PATH}davisson.png`,
+    role: "Organização • Techtalker",
+    github: "",
+    linkedin: "https://br.linkedin.com/in/davisson-medeiros-49674b8b",
   },
   {
     name: "André Oshiro Nishimoto",
@@ -70,5 +63,12 @@ export const contributors = [
     role: "Techtalker",
     github: "",
     linkedin: "https://www.linkedin.com/in/giovanni-massaro-640a59173/",
+  },
+  {
+    name: "Lucas Monaro",
+    photo: `${PROFILE_IMAGE_PATH}lucas.png`,
+    role: "Organização",
+    github: "",
+    linkedin: "https://www.linkedin.com/in/lucas-monaro",
   },
 ];
